@@ -2,27 +2,29 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=1640, height=664">
+<title>HTML 1640x664</title>
+
 <style>
-body { margin:0; width:1640px; height:664px; font-family:Arial; overflow:hidden; }
-.container { position:relative; width:1640px; height:664px; background-size:cover; background-position:center; }
-.avatar { position:absolute; top:50%; left:50%; transform:translate(-50%,-55%); width:260px; height:260px; border-radius:50%; object-fit:cover; border:8px solid rgba(255,255,255,0.9); background:#000; }
-.text { position:absolute; bottom:30px; width:100%; text-align:center; font-size:42px; color:white; text-shadow:0 2px 8px rgba(0,0,0,0.8); padding:0 40px; box-sizing:border-box; }
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 1640px;
+    height: 664px;
+    overflow: hidden;
+}
+
+.container {
+    width: 1640px;
+    height: 664px;
+    position: relative;
+    background: #000;
+}
 </style>
 </head>
+
 <body>
-<div class="container" id="bg">
-    <img id="avatar" class="avatar">
-    <div class="text" id="text"></div>
-</div>
-<script>
-const params = new URLSearchParams(window.location.search);
-const avatar = params.get("img");
-const text = params.get("text");
-const bg = params.get("bg");
-document.getElementById("bg").style.backgroundImage = `url('${bg||'welcome.jpg'}')`;
-if(avatar) document.getElementById("avatar").src = avatar;
-if(text) document.getElementById("text").innerText = decodeURIComponent(text||'');
-</script>
+    <div class="container">
+        <!-- tu contenido -->
+    </div>
 </body>
 </html>
