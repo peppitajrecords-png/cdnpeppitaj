@@ -60,7 +60,7 @@
     const avatar = params.get("img");
     const text = params.get("text");
 
-document.getElementById("bg").style.backgroundImage = "url('welcome.jpg')";
+document.getElementById("bg").style.backgroundImage = "url('" + params.get("bg") + "')";
 
     if (avatar) document.getElementById("avatar").src = avatar;
     if (text) document.getElementById("text").innerText = decodeURIComponent(text);
