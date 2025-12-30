@@ -2,29 +2,40 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<title>HTML 1640x664</title>
-
+<title>CDN Image</title>
 <style>
-html, body {
+  body {
     margin: 0;
-    padding: 0;
-    width: 1640px;
-    height: 664px;
-    overflow: hidden;
-}
-
-.container {
-    width: 1640px;
-    height: 664px;
-    position: relative;
+    width: 1200px;
+    height: 630px;
     background: #000;
-}
+    color: white;
+    font-family: Arial, sans-serif;
+  }
+  #avatar {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin: 40px auto;
+    display: block;
+  }
+  #text {
+    text-align: center;
+    font-size: 48px;
+  }
 </style>
 </head>
-
 <body>
-    <div class="container">
-        <!-- tu contenido -->
-    </div>
+
+<img id="avatar">
+<div id="text"></div>
+
+<script>
+  const params = new URLSearchParams(window.location.search);
+  document.getElementById("text").textContent = params.get("text") || "Default";
+  document.getElementById("avatar").src = params.get("img") || "";
+</script>
+
 </body>
 </html>
