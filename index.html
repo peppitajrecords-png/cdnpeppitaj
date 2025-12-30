@@ -2,47 +2,64 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<title>Convertir Author ID a Base64</title>
+<title>Avatar URL → Base64</title>
 <style>
     body {
-        font-family: Arial, sans-serif;
-        padding: 40px;
-        background-color: #121212;
+        background: #0f0f0f;
         color: #fff;
+        font-family: Arial, sans-serif;
+        padding: 30px;
         text-align: center;
     }
     input, button {
+        width: 90%;
+        max-width: 700px;
         padding: 10px;
         font-size: 16px;
         margin: 10px 0;
     }
-    #resultado {
-        margin-top: 20px;
-        word-break: break-all;
-        background: #1f1f1f;
+    textarea {
+        width: 90%;
+        max-width: 700px;
+        height: 200px;
+        background: #1b1b1b;
+        color: #0f0;
+        border: none;
         padding: 10px;
-        border-radius: 8px;
+        resize: vertical;
     }
 </style>
 </head>
 <body>
 
-<h1>Convertir Author ID a Base64</h1>
-<input type="text" id="authorId" placeholder="Ingresa el Author ID">
-<br>
-<button onclick="convertirBase64()">Convertir a Base64</button>
+<h2>Convertir AuthorAvatar (URL) a Base64</h2>
 
-<div id="resultado"></div>
+<input id="imgUrl" placeholder="Pega aquí el $authorAvatar o URL de imagen">
+
+<button onclick="convertir()">Convertir</button>
+
+<textarea id="output" placeholder="Aquí aparecerá el Base64..."></textarea>
 
 <script>
-function convertirBase64() {
-    const authorId = document.getElementById('authorId').value.trim();
-    if(!authorId) {
-        alert('Ingresa un Author ID');
-        return;
+async function convertir() {
+    const url = document.getElementById("imgUrl").value.trim();
+    if (!url) return alert("Pega una URL primero");
+
+    try {
+        const res = await fetch(url);
+        const blob = await res.blob();
+
+        const reader = new FileReader();
+        reader.onloadend = () => {
+            // Quita "data:image/png;base64," si solo querés el base64 puro
+            const base64 = reader.result.split(',')[1];
+            document.getElementById("output").value = base64;
+        };
+        reader.readAsDataURL(blob);
+
+    } catch (e) {
+        alert("Error al convertir la imagen (CORS o URL inválida)");
     }
-    const base64 = btoa(authorId); // convierte a base64
-    document.getElementById('resultado').innerText = base64;
 }
 </script>
 
